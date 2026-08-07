@@ -1,0 +1,52 @@
+/**
+ * loads and decorates the block
+ * @param {Element} block The teaser block element
+ */
+export default function decorate(block) {
+  const [imageRow, titleRow, descriptionRow, actionsRow] = block.querySelectorAll(':scope > div');
+
+  const imgWrapper = imageRow?.querySelector(':scope > div');
+  if (imgWrapper) {
+    imgWrapper.classList.add('teaser__img');
+    const picture = imgWrapper.querySelector('picture');
+    if (picture) {
+      picture.classList.add('image');
+      picture.querySelector('img')?.classList.add('image__image');
+    }
+    imageRow.replaceWith(imgWrapper);
+  }
+
+  const content = document.createElement('div');
+  content.className = 'teaser__content';
+
+  const titleCol = titleRow?.querySelector(':scope > div');
+  if (titleCol) {
+    titleCol.querySelector('h1, h2, h3, h4, h5, h6')?.classList.add('teaser__title');
+    content.append(...titleCol.childNodes);
+  }
+
+  const descriptionCol = descriptionRow?.querySelector(':scope > div');
+  if (descriptionCol) {
+    descriptionCol.classList.add('teaser__description');
+    content.append(descriptionCol);
+  }
+
+  const actionContainer = document.createElement('div');
+  actionContainer.className = 'teaser__action-container';
+  actionsRow?.querySelectorAll(':scope > div').forEach((col) => {
+    const link = col.querySelector('a');
+    if (link) {
+      link.classList.add('teaser__action-link');
+      actionContainer.append(link);
+    }
+  });
+  if (actionContainer.childElementCount) {
+    content.append(actionContainer);
+  }
+
+  titleRow?.remove();
+  descriptionRow?.remove();
+  actionsRow?.remove();
+
+  block.append(content);
+}
