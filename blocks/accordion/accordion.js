@@ -1,20 +1,23 @@
-function decorateAccordion(el) {
-  const titles = el.querySelectorAll(':scope > div:nth-child(odd)');
-  titles.forEach((title) => {
-    // Add a class to the title container
-    title.classList.add('item-title');
-    // Remove the empty div
-    title.querySelector(':scope > div:last-of-type').remove();
-    // Add a class to the content
-    title.nextElementSibling.classList.add('item-content');
-    // Add a click handler to open the content
-    title.addEventListener('click', () => {
-      title.classList.toggle('open');
-    });
+/*
+ * Accordion Block
+ * Recreate an accordion
+ * https://www.hlx.live/developer/block-collection/accordion
+ */
+
+export default function decorate(block) {
+  [...block.children].forEach((row) => {
+    // decorate accordion item label
+    const label = row.children[0];
+    const summary = document.createElement('summary');
+    summary.className = 'accordion-item-label';
+    summary.append(...label.childNodes);
+    // decorate accordion item body
+    const body = row.children[1];
+    body.className = 'accordion-item-body';
+    // decorate accordion item
+    const details = document.createElement('details');
+    details.className = 'accordion-item';
+    details.append(summary, body);
+    row.replaceWith(details);
   });
 }
-
-const els = document.querySelectorAll('.accordion');
-els.forEach((el) => {
-  decorateAccordion(el);
-});
