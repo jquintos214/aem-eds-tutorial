@@ -1,0 +1,13 @@
+Property,Type tag,Authored (dialog),Design (policy),Derived (model logic),Content Reality
+List Source,Governance - dialog structure toggle. Disappears,"Dropdown - Children Pages, Fixed List of Pages, or Search",Policy can restrict which source options are available to authors,Determines which resolution code path runs: child traversal authored path list or query,TODO: verify against author content
+Parent Page,Content,Pathfield (shown only when Source = Children Pages),,Its direct child pages become the list items,TODO: verify against author content
+Fixed List Items,Content,Multifield of Pathfields (shown only when Source = Fixed List),Policy can cap the maximum number of items,Each pathfield resolves to a page whose title/description/date are read at render time,TODO: verify against author content
+Search Root Path,Content,Pathfield (shown only when Source = Search),,Scopes the query to descendants of this path,TODO: verify against author content
+Search Tags,Content,Tag picker (multi-select shown only when Source = Search),,Query is filtered to pages tagged with the selected tag(s),TODO: verify against author content
+Sort Order,Content,"Dropdown (e.g. Page Order, Title A-Z, Newest to Oldest)",Policy can restrict which sort options are available,Applied to the resolved item set before the item limit is applied,TODO: verify against author content
+Number of Items,Content,Numberfield (limit),Policy can cap the maximum allowed value,Truncates the resolved item set; unlimited if left blank,TODO: verify against author content
+Link Items,Modifier - wraps each item's title in an anchor. Disappears,Checkbox,,"When enabled, the item title links to its resolved page path",TODO: verify against author content
+Show Description,Modifier - toggles description rendering. Disappears,Checkbox,,Pulls the resolved page's description property when enabled,TODO: verify against author content
+Show Modification Date,Modifier - toggles date rendering. Disappears,Checkbox,,Pulls the resolved page's last-modified date when enabled,TODO: verify against author content
+Date Format,Content,Textfield (date pattern; shown only when Show Modification Date is enabled),Policy can define an org-wide default format,Resolves to the policy default format if left blank,TODO: verify against author content
+Style variant,"Content, governance",Author picks from paintbrush,Policy defines which classes exist,N/A - resolves directly to the policy-defined CSS class(es) selected; no dynamic fallback,TODO: verify against author content

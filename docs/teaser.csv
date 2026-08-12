@@ -1,0 +1,16 @@
+Property,Type tag,Authored (dialog),Design (policy),Derived (model logic),Content Reality
+Title,Content,Textfield,,Can be inherited from linked page or first cta. Falls back to the linked page's title when blank,TODO: verify against author content
+Description,Content,RTE,Policy can restrict allowed RTE plugins,Can be inherited from linked page or first cta. Falls back to linked page description,TODO: verify against author content
+Heading level,Content,Select/dropdown (h1-h6 plus 'None'),,"Allowed levels, plus a default. Resolves to the policy default if unset",TODO: verify against author content
+Image,Content,Pathfield to DAM (asset picker),Can be disabled entirely per policy,Can be inherited from linked page or first cta. Alt text may inherit from the asset metadata,TODO: verify against author content
+Style variant,"Content, governance",Author picks from paintbrush,Policy defines which classes exist,N/A - resolves directly to the policy-defined CSS class(es) selected; no dynamic fallback,TODO: verify against author content
+Target,Modifier - qualifies the link property. Disappears,Checkbox ('Open in new tab' per action/CTA),Not typically policy-governed; can be forced site-wide via policy in some implementations,Adds rel='noopener noreferrer' automatically when target=_blank is set,TODO: verify against author content
+Alt Text,Content,Textfield (optional alongside the image pathfield),,Can be inherited from linked page or first cta,TODO: verify against author content
+Pretitle,Content,Textfield,,No inheritance - teaser-specific no fallback if blank,TODO: verify against author content
+Hide Title,Modifier - suppresses Title rendering. Disappears,Checkbox,,Title value is still resolved through the inheritance chain but withheld from markup,TODO: verify against author content
+Hide Description,Modifier - suppresses Description rendering. Disappears,Checkbox,,Description value is still resolved through the inheritance chain but withheld from markup,TODO: verify against author content
+Hide Image,Modifier - suppresses Image rendering. Disappears,Checkbox,,Image is still resolved through the inheritance chain but withheld from markup,TODO: verify against author content
+Link URL,Content,Pathfield/URL field (shown only when Actions are not enabled),Whether this field or Actions is shown is set per policy,Wraps the whole teaser in a single anchor when set and no actions are configured,TODO: verify against author content
+Actions enabled,Governance - dialog structure toggle. Disappears,Not directly authored - controlled by policy,Policy determines whether authors see the single Link URL field or the multi-CTA Actions field,Determines which link-rendering code path (single link vs action list) executes,TODO: verify against author content
+CTA Link,Content,Multifield row - URL/Pathfield per action,Policy can cap the maximum number of actions,Each action becomes an anchor href; teaser falls back to the single Link URL path when the actions list is empty,TODO: verify against author content
+CTA Text,Content,Multifield row - Textfield per action,,Falls back to the linked page's title when left blank (mirrors Title's inheritance),TODO: verify against author content
