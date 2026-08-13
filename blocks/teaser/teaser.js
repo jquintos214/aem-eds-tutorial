@@ -7,7 +7,7 @@ export default function decorate(block) {
 
   const imgWrapper = imageRow?.querySelector(':scope > div');
   if (imgWrapper) {
-    imgWrapper.classList.add('teaser__img');
+    imgWrapper.classList.add('teaser-img');
     const picture = imgWrapper.querySelector('picture');
     if (picture) {
       picture.classList.add('image');
@@ -17,26 +17,26 @@ export default function decorate(block) {
   }
 
   const content = document.createElement('div');
-  content.className = 'teaser__content';
+  content.className = 'teaser-content';
 
   const titleCol = titleRow?.querySelector(':scope > div');
   if (titleCol) {
-    titleCol.querySelector('h1, h2, h3, h4, h5, h6')?.classList.add('teaser__title');
+    titleCol.querySelector('h1, h2, h3, h4, h5, h6')?.classList.add('teaser-title');
     content.append(...titleCol.childNodes);
   }
 
   const descriptionCol = descriptionRow?.querySelector(':scope > div');
   if (descriptionCol) {
-    descriptionCol.classList.add('teaser__description');
+    descriptionCol.classList.add('teaser-description');
     content.append(descriptionCol);
   }
 
   const actionContainer = document.createElement('div');
-  actionContainer.className = 'teaser__action-container';
+  actionContainer.className = 'teaser-action-container';
   actionsRow?.querySelectorAll(':scope > div').forEach((col) => {
     const link = col.querySelector('a');
     if (link) {
-      link.classList.add('teaser__action-link');
+      link.classList.add('teaser-action-link');
       actionContainer.append(link);
     }
   });
