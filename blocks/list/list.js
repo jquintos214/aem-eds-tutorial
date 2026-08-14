@@ -38,7 +38,23 @@ function parseChildDepth(value) {
 }
 
 function parseTags(value) {
-  return value.split(/[,;]/).map((tag) => tag.trim()).filter(Boolean);
+  return value.split(/[,;]/).map((tag) => tag.trim().toLowerCase()).filter(Boolean);
+}
+
+// query-index delivers multi-value columns as a JSON-encoded array string, e.g. '["a","b"]'
+function parseItemTags(value) {
+  if (!value) return [];
+  try {
+    const parsed = JSON.parse(value);
+    if (!Array.isArray(parsed)) return [];
+    return parsed.map((tag) => String(tag).trim().toLowerCase()).filter(Boolean);
+  } catch {
+    return [];
+  }
+}
+
+function resolveRoot(config) {
+  return config.root?.trim() || window.location.pathname;
 }
 
 async function fetchIndex() {
@@ -62,17 +78,18 @@ function matchesTags(itemTags, tags, matchAll) {
 }
 
 function filterChildPages(items, config) {
-  const root = config.root?.trim() || '/';
+  const root = resolveRoot(config);
   const depth = parseChildDepth(config['child-depth']);
   return items.filter((item) => isWithinDepth(item.path, root, depth));
 }
 
 function filterTags(items, config) {
+  const root = resolveRoot(config);
   const tags = parseTags(config.tags || '');
   const matchAll = (config.match || '').trim().toLowerCase().startsWith('all');
   return items.filter((item) => {
-    const itemTags = (item.tags || '').split(',').map((tag) => tag.trim()).filter(Boolean);
-    return matchesTags(itemTags, tags, matchAll);
+    if (item.path === root || !item.path.startsWith(root)) return false;
+    return matchesTags(parseItemTags(item.tags), tags, matchAll);
   });
 }
 
