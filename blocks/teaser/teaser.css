@@ -17,6 +17,10 @@
   font-size: .8125rem;
 }
 
+.teaser-pretitle {
+  margin-bottom: auto;
+}
+
 .teaser-pretitle *:last-child {
   margin-bottom: 0;
 }
@@ -67,7 +71,7 @@
 }
 
 /* Dark */
-.dark .teaser {
+.dark.teaser {
   background-color: rgb(0 0 0 / 50%);
   color: #fff;
 }
